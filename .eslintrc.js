@@ -4,6 +4,12 @@
  * Author: eidng8
  */
 
+/*
+ * GPLv3 https://www.gnu.org/licenses/gpl-3.0.en.html
+ *
+ * Author: eidng8
+ */
+
 module.exports = {
   root: true,
   env: {
@@ -19,6 +25,8 @@ module.exports = {
   },
   rules: {
     'comma-dangle': ['error', 'always-multiline'],
+    'space-before-function-paren': 'off',
+    '@typescript-eslint/space-before-function-paren': ['error', 'never'],
     'object-curly-spacing': ['error', 'never'],
     'semi': ['error', 'always'],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
