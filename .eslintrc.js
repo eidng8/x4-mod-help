@@ -19,7 +19,7 @@ module.exports = {
   },
   rules: {
     'comma-dangle': ['error', 'always-multiline'],
-    'space-before-function-paren': 'off',
+    'space-before-function-paren': ['error', 'never'],
     '@typescript-eslint/space-before-function-paren': ['error', 'never'],
     'object-curly-spacing': ['error', 'never'],
     'semi': ['error', 'always'],

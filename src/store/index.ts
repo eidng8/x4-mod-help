@@ -13,6 +13,7 @@ export default new Vuex.Store({
   state: {
     paths: {
       unpacked: localStorage.getItem('unpacked-path'),
+      mods: localStorage.getItem('recent-mods'),
     },
   },
   mutations: {},
