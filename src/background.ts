@@ -38,6 +38,15 @@ function createWindow() {
     },
   });
 
+  /*
+   * https://www.electronjs.org/docs/tutorial/devtools-extension
+   * Replace the path with yours, and uncomment the next line to install
+   * dev tools. After it's successfully run once, it can be commented out again.
+   */
+  // BrowserWindow.addDevToolsExtension(
+  //  '%LOCALAPPDATA%\Google\Chrome\User
+  // Data\Default\Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.3.0_0' )
+
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     // noinspection JSIgnoredPromiseFromCall
@@ -106,6 +115,6 @@ if (isDevelopment) {
   } else {
     process.on('SIGTERM', () => {
       app.quit();
-    })
+    });
   }
 }
