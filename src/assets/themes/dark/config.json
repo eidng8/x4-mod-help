@@ -1,0 +1,33 @@
+{
+  "global": {
+    "$--color-primary": "#2D3C91",
+    "$--color-white": "#100F0F",
+    "$--color-black": "#FFFFFF",
+    "$--color-text-primary": "#C8C8C8",
+    "$--color-text-regular": "#D3D3D3",
+    "$--color-text-secondary": "#D0D0D0",
+    "$--color-success": "#427A26",
+    "$--color-warning": "#B47921",
+    "$--color-danger": "#9C0505",
+    "$--color-info": "#727478",
+    "$--border-color-base": "#3B3B3D",
+    "$--border-color-light": "#888A8E",
+    "$--border-color-lighter": "#ADAEB1",
+    "$--border-color-extra-light": "#C1C4C8"
+  },
+  "local": {
+    "$--radio-font-color": "#9D9D9D",
+    "$--badge-background-color": "$--color-danger",
+    "$--card-border-color": "#6B6660",
+    "$--collapse-border-color": "#555556",
+    "$--datepicker-inrange-background-color": "#6B6D6F",
+    "$--datepicker-inrange-hover-background-color": "#646566",
+    "$--notification-border-color": "#656567",
+    "$--popup-modal-background-color": "#4D4B4B",
+    "$--tooltip-fill": "#656262",
+    "$--tooltip-border-color": "#737070",
+    "$--tooltip-color": "#A2A0A0",
+    "$--transfer-panel-header-background-color": "#454545",
+    "$--tree-node-hover-background-color": "#5F6060"
+  }
+}

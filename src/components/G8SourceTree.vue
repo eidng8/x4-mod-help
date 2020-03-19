@@ -5,7 +5,7 @@
   -->
 
 <template>
-  <g8-menu :list="tree.children || []" index-key="path"></g8-menu>
+  <g8-menu :list="tree" index-key="path"></g8-menu>
 </template>
 
 <script lang="ts">
@@ -20,7 +20,7 @@ import G8Menu from './G8Menu.vue';
   },
 })
 export default class G8SourceTree extends Vue {
-  @Prop() public tree!: IPathList;
+  @Prop() public tree!: IPathList = [] as IPathList[];
 }
 </script>
 

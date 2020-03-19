@@ -5,7 +5,7 @@
   -->
 
 <template>
-  <el-submenu :index="item[indexKey]" v-if="hasChild">
+  <el-submenu :index="item.key" v-if="hasChild">
     <template slot="title">
       <span>{{ item.name }}</span>
     </template>
@@ -30,8 +30,6 @@ import IMenuItem from '@/types/MenuItem';
 })
 export default class G8MenuItem extends Vue {
   @Prop() public item!: IMenuItem;
-
-  @Prop({default: 'key'}) public indexKey!: string;
 
   public expended = false;
 

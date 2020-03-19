@@ -5,14 +5,9 @@
   -->
 
 <template>
-  <el-menu default-active="2"
-           class="el-menu-vertical-demo"
-           @open="handleOpen"
-           @close="handleClose">
-    <g8-menu-item v-for="(item, idx) of list"
-                  :key="idx"
-                  :item="item"
-                  index-key="indexKey"></g8-menu-item>
+  <el-menu>
+    <g8-menu-item v-for="(item, idx) of list" :key="idx" :item="item">
+    </g8-menu-item>
   </el-menu>
 </template>
 
@@ -30,16 +25,12 @@ import G8MenuItem from './G8MenuItem.vue';
 export default class G8Menu extends Vue {
   @Prop() public list!: IMenuItem[];
 
-  @Prop({default: 'key'}) public indexKey!: string;
-
   public expended = false;
-
-  public handleOpen() {
-    console.log('open');
-  }
-
-  public handleClose() {
-    console.log('close');
-  }
 }
 </script>
+
+<style scoped>
+.el-menu {
+  height: 100%;
+}
+</style>

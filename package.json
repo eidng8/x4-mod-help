@@ -17,7 +17,7 @@
     "@types/node": "^12.12.30",
     "core-js": "^3.6.4",
     "dexie": "^2.0.4",
-    "directory-tree-promise": "^2.0.1",
+    "directory-tree": "^2.2.4",
     "element-ui": "^2.13.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",

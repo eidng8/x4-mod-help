@@ -11,8 +11,8 @@ import App from './App.vue';
 import store from './store';
 import DataStore from './db/DataStore';
 
-import 'element-ui/lib/theme-chalk/index.css';
-import './scss/customize.scss';
+import '@/assets/themes/dark/index.css';
+// import './scss/customize.scss';
 
 Vue.use(ElementUI);
 
