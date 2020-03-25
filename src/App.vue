@@ -21,10 +21,9 @@
         <g8-menu :list="sources" @select="onSelect"></g8-menu>
       </el-aside>
       <el-container ref="fileContent">
-        csdfds
+        <g8-tree-view :item="treeData"></g8-tree-view>
       </el-container>
     </el-container>
-
     <el-container>
       <el-col>status</el-col>
     </el-container>
@@ -39,11 +38,35 @@ import IPathList from '@/types/PathList';
 import G8Menu from '@/components/G8Menu.vue';
 import G8ModsTree from '@/components/G8ModsTree.vue';
 import IMenuItem from '@/types/MenuItem';
+import G8TreeView from '@/components/G8TreeView.vue';
 
 @Component({
-  components: {G8Menu, G8ModsTree, G8SourceTree},
+  components: {G8TreeView, G8Menu, G8ModsTree, G8SourceTree},
 })
 export default class App extends Vue {
+  public treeData = {
+    name: 'My Tree',
+    children: [
+      {name: 'hello'},
+      {name: 'wat'},
+      {
+        name: 'child folder',
+        children: [
+          {
+            name: 'child folder',
+            children: [{name: 'hello'}, {name: 'wat'}],
+          },
+          {name: 'hello'},
+          {name: 'wat'},
+          {
+            name: 'child folder',
+            children: [{name: 'hello'}, {name: 'wat'}],
+          },
+        ],
+      },
+    ],
+  };
+
   public list: IMenuItem[] = [
     {key: '/a', name: 'item 1', children: [{key: '1', name: 'a'}]},
   ];
