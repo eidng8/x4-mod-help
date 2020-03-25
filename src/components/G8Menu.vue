@@ -5,7 +5,7 @@
   -->
 
 <template>
-  <el-menu>
+  <el-menu @select="$emit('select', $event)">
     <g8-menu-item v-for="(item, idx) of list" :key="idx" :item="item">
     </g8-menu-item>
   </el-menu>

@@ -10,7 +10,6 @@
     <el-container style="border:solid 1px; height: 50vh;">
       <el-aside width="200px" style="height: 100%">
         <g8-menu :list="list"></g8-menu>
-        <!--        <g8-mods-tree :list="list" style="height: 100%"></g8-mods-tree>-->
       </el-aside>
       <el-container id="diff">
         csdfds
@@ -19,10 +18,9 @@
 
     <el-container style="border:solid 1px; height: calc(50vh - 40px);">
       <el-aside width="200px">
-        <g8-menu :list="sources"></g8-menu>
-        <!--        <g8-source-tree :tree="this.sources"></g8-source-tree>-->
+        <g8-menu :list="sources" @select="onSelect"></g8-menu>
       </el-aside>
-      <el-container>
+      <el-container ref="fileContent">
         csdfds
       </el-container>
     </el-container>
@@ -55,6 +53,20 @@ export default class App extends Vue {
   constructor() {
     super();
     this.loadSourceTree();
+  }
+
+  onSelect(item: string) {
+    const doc = new DOMParser().parseFromString(item, 'text/xml');
+    if (!doc) {
+      console.log('parse error');
+      return;
+    }
+
+    const errors = doc.getElementsByTagName('parsererror');
+    if (errors && errors.length) {
+      this.$refs.fileContent.$el.innerHTML = errors[0];
+      console.log(doc);
+    }
   }
 
   private loadSourceTree() {
