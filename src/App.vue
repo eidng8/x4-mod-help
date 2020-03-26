@@ -21,7 +21,10 @@
         <g8-menu :list="sources" @select="onSelect"></g8-menu>
       </el-aside>
       <el-container ref="fileContent">
-        <g8-tree-view :item="treeData"></g8-tree-view>
+        <ul class="g8-tree-view">
+          <g8-tree-view class="g8-tree__highlight_hover"
+                        :item="treeData"></g8-tree-view>
+        </ul>
       </el-container>
     </el-container>
     <el-container>
@@ -37,7 +40,7 @@ import G8SourceTree from '@/components/G8SourceTree.vue';
 import IPathList from '@/types/PathList';
 import G8Menu from '@/components/G8Menu.vue';
 import G8ModsTree from '@/components/G8ModsTree.vue';
-import IMenuItem from '@/types/MenuItem';
+import {IMenuItem} from '@/types/MenuItem';
 import G8TreeView from '@/components/G8TreeView.vue';
 
 @Component({
@@ -48,13 +51,34 @@ export default class App extends Vue {
     name: 'My Tree',
     children: [
       {name: 'hello'},
-      {name: 'wat'},
+      {
+        name: 'wat',
+        tags: [
+          {key: 'a', label: 'a'},
+          {key: 'b', label: 'ab'},
+          {key: 'c', label: 'abc'},
+          {key: 'a', label: 1234},
+          {key: 'a', label: 12345},
+          {key: 'a', label: 123456},
+          {key: 'a', label: 1234567},
+          {key: 'a', label: 12345678},
+          {key: 'a', label: 123456789},
+          {key: 'a', label: 1234567890},
+          {key: 'a', label: 'wwwwwwwwwwwwwww'},
+        ],
+      },
       {
         name: 'child folder',
         children: [
           {
             name: 'child folder',
-            children: [{name: 'hello'}, {name: 'wat'}],
+            children: [
+              {name: 'hello'},
+              {
+                name: 'wat',
+                tags: [{key: 'a', label: 'z'}],
+              },
+            ],
           },
           {name: 'hello'},
           {name: 'wat'},
@@ -131,9 +155,9 @@ export default class App extends Vue {
   /*color: #2c3e50;*/
   /*margin-top: 60px;*/
 
-  .el-col {
-    padding-bottom: 2px;
-    padding-top: 2px;
-  }
+  /*.el-col {*/
+  /*  padding-bottom: 2px;*/
+  /*  padding-top: 2px;*/
+  /*}*/
 }
 </style>
