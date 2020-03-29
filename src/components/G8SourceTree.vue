@@ -20,7 +20,7 @@ import G8Menu from './G8Menu.vue';
   },
 })
 export default class G8SourceTree extends Vue {
-  @Prop() public tree!: IPathList = [] as IPathList[];
+  @Prop() public tree!: IPathList[];
 }
 </script>
 

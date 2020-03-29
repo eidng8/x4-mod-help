@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import IMenuItem from '@/types/MenuItem';
+import {IMenuItem} from '@/types/MenuItem';
 
 @Component({
   name: 'g8-menu-item',

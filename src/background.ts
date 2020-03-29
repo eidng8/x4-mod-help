@@ -6,7 +6,7 @@
 
 'use strict';
 
-import {app, BrowserWindow, Menu, protocol} from 'electron';
+import {app, BrowserWindow, Menu, nativeTheme, protocol} from 'electron';
 import {
   createProtocol,
   installVueDevtools,
@@ -62,6 +62,12 @@ function createWindow() {
   win.on('closed', () => {
     win = null;
   });
+
+  win.on('ready-to-show', () => {
+    if (win && nativeTheme.shouldUseDarkColors) {
+      win.webContents.send('on-theme-change', 'dark');
+    }
+  });
 }
 
 // Quit when all windows are closed.
@@ -102,6 +108,10 @@ app.on('ready', async () => {
 
   }
   createWindow();
+});
+
+nativeTheme.addListener('updated', () => {
+  if (!win) return;
 });
 
 // Exit cleanly on request from parent process in development mode.
