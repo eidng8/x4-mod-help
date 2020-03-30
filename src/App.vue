@@ -42,7 +42,6 @@ import G8Menu from '@/components/G8Menu.vue';
 import G8ModsTree from '@/components/G8ModsTree.vue';
 import {IMenuItem} from '@/types/MenuItem';
 import G8TreeView from 'g8-vue-tree/src/components/G8TreeView.vue';
-import {ipcRenderer} from 'electron';
 
 @Component({
   components: {G8TreeView, G8Menu, G8ModsTree, G8SourceTree},
@@ -100,9 +99,6 @@ export default class App extends Vue {
 
   constructor() {
     super();
-    ipcRenderer.on('on-theme-change', (evt, msg) => {
-      console.log(evt, msg);
-    });
     this.loadSourceTree();
   }
 
