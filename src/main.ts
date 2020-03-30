@@ -4,13 +4,13 @@
  * Author: eidng8
  */
 
+import '@/assets/themes/dark/index.css';
 // import fs from 'fs';
 import {ipcRenderer} from 'electron';
 import Vue from 'vue';
 import ElementUI from 'element-ui';
-import App from './App.vue';
-import store from './store';
-import '@/assets/themes/dark/index.css';
+import App from '@/App.vue';
+import store from '@/store';
 // import DataStore from './db/DataStore';
 // import './scss/customize.scss';
 

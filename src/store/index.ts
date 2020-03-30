@@ -6,17 +6,12 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
+import app from './app';
+import game from './game';
+import mods from './mods';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    paths: {
-      unpacked: localStorage.getItem('unpacked-path'),
-      mods: localStorage.getItem('recent-mods'),
-    },
-  },
-  mutations: {},
-  actions: {},
-  modules: {},
+  modules: {app, game, mods},
 });

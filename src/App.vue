@@ -9,7 +9,7 @@
 
     <el-container style="border:solid 1px; height: 50vh;">
       <el-aside width="200px" style="height: 100%">
-        <g8-menu :list="list"></g8-menu>
+        <!--g8-menu :list="list"></g8-menu-->
       </el-aside>
       <el-container id="diff">
         csdfds
@@ -36,12 +36,12 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import dir from 'directory-tree';
+import G8TreeView from 'g8-vue-tree/src/components/G8TreeView.vue';
 import G8SourceTree from '@/components/G8SourceTree.vue';
 import IPathList from '@/types/PathList';
 import G8Menu from '@/components/G8Menu.vue';
 import G8ModsTree from '@/components/G8ModsTree.vue';
 import {IMenuItem} from '@/types/MenuItem';
-import G8TreeView from 'g8-vue-tree/src/components/G8TreeView.vue';
 
 @Component({
   components: {G8TreeView, G8Menu, G8ModsTree, G8SourceTree},
