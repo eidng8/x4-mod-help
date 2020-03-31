@@ -18,7 +18,7 @@
 
     <el-container style="border:solid 1px; height: calc(50vh - 40px);">
       <el-aside width="200px">
-        <g8-menu :list="sources" @select="onSelect"></g8-menu>
+        <!--g8-menu :list="sources" @select="onSelect"></g8-menu-->
       </el-aside>
       <el-container ref="fileContent">
         <ul class="g8-tree-view">
@@ -35,16 +35,14 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import dir from 'directory-tree';
+import {getModule} from 'vuex-module-decorators';
 import G8TreeView from 'g8-vue-tree/src/components/G8TreeView.vue';
-import G8SourceTree from '@/components/G8SourceTree.vue';
 import IPathList from '@/types/PathList';
-import G8Menu from '@/components/G8Menu.vue';
-import G8ModsTree from '@/components/G8ModsTree.vue';
 import {IMenuItem} from '@/types/MenuItem';
+import GameState from '@/store/game-state';
 
 @Component({
-  components: {G8TreeView, G8Menu, G8ModsTree, G8SourceTree},
+  components: {G8TreeView},
 })
 export default class App extends Vue {
   public treeData = {
@@ -100,6 +98,7 @@ export default class App extends Vue {
   constructor() {
     super();
     this.loadSourceTree();
+    console.log(getModule(GameState).unpackedPath);
   }
 
   onSelect(item: string) {
@@ -117,17 +116,18 @@ export default class App extends Vue {
   }
 
   private loadSourceTree() {
-    const path: string = this.$store.state.paths.unpacked;
+    this.sources = [];
+    const path = getModule(GameState).unpackedPath;
     if (!path) {
       this.sources = [];
-      return;
+      // return;
     }
-
-    const tee = dir(path, {extensions: /\.xml/i, normalizePath: true});
-    const tree = this.pathList2Menu(tee);
-    if (tree.children) {
-      this.sources = tree.children;
-    }
+    //
+    // const tee = dir(path, {extensions: /\.xml/i, normalizePath: true});
+    // const tree = this.pathList2Menu(tee);
+    // if (tree.children) {
+    //   this.sources = tree.children;
+    // }
   }
 
   private pathList2Menu(list: IPathList): IMenuItem {

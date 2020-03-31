@@ -4,14 +4,9 @@
  * Author: eidng8
  */
 
-import Vue from 'vue';
-import Vuex from 'vuex';
-import app from './app';
-import game from './game';
-import mods from './mods';
+import store from './store';
+import AppState from './app-state';
+import GameState from './game-state';
+import ModsState from './mods-state';
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-  modules: {app, game, mods},
-});
+export {store, AppState, GameState, ModsState};
