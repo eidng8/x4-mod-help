@@ -5,37 +5,35 @@
  */
 
 import {Module, Mutation, VuexModule} from 'vuex-module-decorators';
-import FileNotFound from '@/errors/file-not-found';
 import store from './store';
 
 const ModsPath = 'mods-path';
 
-const LastMod = 'last-mods';
+const LastMods = 'last-mods';
 
 @Module({store, dynamic: true, namespaced: true, name: 'mods'})
 export default class ModsState extends VuexModule {
-  mods = localStorage.getItem(ModsPath);
+  private mods = localStorage.getItem(ModsPath);
 
-  last = localStorage.getItem(LastMod);
+  private last: string[] = JSON.parse(localStorage.getItem(LastMods) || '[]');
 
   get modsPath(): string | null {
     return this.mods;
   }
 
-  get lastMod(): string | null {
+  get lastMods(): string[] {
     return this.last;
   }
 
   @Mutation
   setModsPath(path: string): void {
-    FileNotFound.throwIfNotExist(path);
     this.mods = path;
     localStorage.setItem(ModsPath, path);
   }
 
   @Mutation
-  setLastMod(name: string): void {
-    this.last = name;
-    localStorage.setItem(LastMod, name);
+  pushLastMod(name: string): void {
+    this.last.push(name);
+    localStorage.setItem(LastMods, JSON.stringify(name));
   }
 };

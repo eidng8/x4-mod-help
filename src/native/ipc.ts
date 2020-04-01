@@ -7,15 +7,16 @@
 'use strict';
 
 import {BrowserWindow, ipcMain, nativeTheme} from 'electron';
+import {GetTheme, ThemeChanged} from './index';
+import {getTheme} from './app';
+
 
 export default function (win: BrowserWindow | null) {
   nativeTheme.addListener('updated', () => {
-    if (win && nativeTheme.shouldUseDarkColors) {
-      win.webContents.send('system-theme-changed', 'dark');
+    if (win) {
+      win.webContents.send(ThemeChanged, getTheme());
     }
   });
 
-  ipcMain.on('get-system-theme', evt => {
-    evt.returnValue = win && nativeTheme.shouldUseDarkColors;
-  });
+  ipcMain.on(GetTheme, evt => console.log(evt.returnValue = getTheme()));
 }

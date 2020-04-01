@@ -11,15 +11,26 @@ const AutoOpenLast = 'auto-open-last';
 
 @Module({store, dynamic: true, namespaced: true, name: 'app'})
 export default class AppState extends VuexModule {
-  autoOpenLast = !!localStorage.getItem(AutoOpenLast);
+  private autoOpenLast = !!localStorage.getItem(AutoOpenLast);
+
+  private _theme = 'light';
 
   get shouldOpenLast(): boolean {
     return this.autoOpenLast;
+  }
+
+  get theme(): string {
+    return this._theme;
   }
 
   @Mutation
   setAutoOpenLast(auto: boolean): void {
     this.autoOpenLast = auto;
     localStorage.setItem(AutoOpenLast, auto ? '1' : '');
+  }
+
+  @Mutation
+  setTheme(theme: string): void {
+    this._theme = theme;
   }
 };

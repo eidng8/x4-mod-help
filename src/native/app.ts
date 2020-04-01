@@ -6,7 +6,7 @@
 
 'use strict';
 
-import {app, Menu, protocol} from 'electron';
+import {app, Menu, nativeTheme, protocol} from 'electron';
 import {installVueDevtools} from 'vue-cli-plugin-electron-builder/lib';
 import createWindow from './browser';
 
@@ -75,3 +75,6 @@ if (isDevelopment) {
   }
 }
 
+export function getTheme() {
+  return nativeTheme.shouldUseDarkColors ? 'dark' : 'light';
+}

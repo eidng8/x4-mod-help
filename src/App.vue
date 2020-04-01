@@ -1,3 +1,4 @@
+import {ipcRenderer} from "electron";
 <!--
   - GPLv3 https://www.gnu.org/licenses/gpl-3.0.en.html
   -
@@ -9,7 +10,6 @@
 
     <el-container style="border:solid 1px; height: 50vh;">
       <el-aside width="200px" style="height: 100%">
-        <!--g8-menu :list="list"></g8-menu-->
       </el-aside>
       <el-container id="diff">
         csdfds
@@ -18,10 +18,9 @@
 
     <el-container style="border:solid 1px; height: calc(50vh - 40px);">
       <el-aside width="200px">
-        <!--g8-menu :list="sources" @select="onSelect"></g8-menu-->
       </el-aside>
       <el-container ref="fileContent">
-        <ul class="g8-tree-view">
+        <ul class="g8-tree-view" :class="themeClass">
           <g8-tree-view class="g8-tree__highlight_hover"
                         :item="treeData"></g8-tree-view>
         </ul>
@@ -34,18 +33,18 @@
 </template>
 
 <script lang="ts">
+import {ipcRenderer} from 'electron';
 import {Component, Vue} from 'vue-property-decorator';
 import {getModule} from 'vuex-module-decorators';
 import G8TreeView from 'g8-vue-tree/src/components/G8TreeView.vue';
-import IPathList from '@/types/PathList';
-import {IMenuItem} from '@/types/MenuItem';
-import GameState from '@/store/game-state';
+import {GameState} from '@/store';
+import {GetTheme, ThemeChanged} from '@/native';
 
 @Component({
   components: {G8TreeView},
 })
 export default class App extends Vue {
-  public treeData = {
+  treeData = {
     name: 'My Tree',
     children: [
       {name: 'hello'},
@@ -89,60 +88,61 @@ export default class App extends Vue {
     ],
   };
 
-  public list: IMenuItem[] = [
-    {key: '/a', name: 'item 1', children: [{key: '1', name: 'a'}]},
-  ];
+  theme = 'light';
 
-  public sources!: IMenuItem[];
+  get themeClass() {
+    return `g8-tree__${this.theme}`;
+  }
 
   constructor() {
     super();
-    this.loadSourceTree();
+    // this.loadSourceTree();
     console.log(getModule(GameState).unpackedPath);
+
+    this.theme = ipcRenderer.sendSync(GetTheme);
+
+    ipcRenderer.on(ThemeChanged, (evt, theme) => (this.theme = theme));
   }
 
-  onSelect(item: string) {
-    const doc = new DOMParser().parseFromString(item, 'text/xml');
-    if (!doc) {
-      console.log('parse error');
-      return;
-    }
+  // onSelect(item: string) {
+  //   const doc = new DOMParser().parseFromString(item, 'text/xml');
+  //   if (!doc) {
+  //     console.log('parse error');
+  //     return;
+  //   }
+  //
+  //   const errors = doc.getElementsByTagName('parsererror');
+  //   if (errors && errors.length) {
+  //     // this.$refs.fileContent.$el.innerHTML = errors[0];
+  //     console.log(doc);
+  //   }
+  // }
 
-    const errors = doc.getElementsByTagName('parsererror');
-    if (errors && errors.length) {
-      // this.$refs.fileContent.$el.innerHTML = errors[0];
-      console.log(doc);
-    }
-  }
-
-  private loadSourceTree() {
-    this.sources = [];
-    const path = getModule(GameState).unpackedPath;
-    if (!path) {
-      this.sources = [];
-      // return;
-    }
-    //
-    // const tee = dir(path, {extensions: /\.xml/i, normalizePath: true});
-    // const tree = this.pathList2Menu(tee);
-    // if (tree.children) {
-    //   this.sources = tree.children;
-    // }
-  }
-
-  private pathList2Menu(list: IPathList): IMenuItem {
-    const item: IMenuItem = {name: list.name, key: list.path};
-    if (!list.path) {
-      console.log(list);
-    }
-    if (list.children) {
-      item.children = [];
-      for (const child of list.children) {
-        item.children.push(this.pathList2Menu(child));
-      }
-    }
-    return item;
-  }
+  // private loadSourceTree() {
+  //   this.sources = [];
+  //   const path = getModule(GameState).unpackedPath;
+  //   if (!path) return;
+  //
+  //   const tee = dir(path, {extensions: /\.xml/i, normalizePath: true});
+  //   const tree = this.pathList2Menu(tee);
+  //   if (tree.children) {
+  //     this.sources = tree.children;
+  //   }
+  // }
+  //
+  // private pathList2Menu(list: IPathList): IMenuItem {
+  //   const item: IMenuItem = {name: list.name, key: list.path};
+  //   if (!list.path) {
+  //     console.log(list);
+  //   }
+  //   if (list.children) {
+  //     item.children = [];
+  //     for (const child of list.children) {
+  //       item.children.push(this.pathList2Menu(child));
+  //     }
+  //   }
+  //   return item;
+  // }
 }
 </script>
 

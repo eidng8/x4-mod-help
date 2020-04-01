@@ -6,18 +6,10 @@
 
 import '@/assets/themes/dark/index.css';
 // import fs from 'fs';
-import {ipcRenderer} from 'electron';
 import Vue from 'vue';
 import ElementUI from 'element-ui';
 import App from '@/App.vue';
-import store from '@/store';
-// import DataStore from './db/DataStore';
-// import './scss/customize.scss';
-
-const mode = ipcRenderer.sendSync('get-system-theme');
-console.log(mode);
-
-ipcRenderer.on('system-theme-changed', (evt, theme) => console.log(theme));
+import {store} from '@/store';
 
 Vue.use(ElementUI);
 
